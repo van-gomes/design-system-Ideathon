@@ -1,0 +1,3 @@
+{
+  "extends": "@roche-ui/eslint-config"
+}
