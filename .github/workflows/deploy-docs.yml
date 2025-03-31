@@ -28,8 +28,10 @@ jobs:
         working-directory: ./packages/docs
         run: npm run build-storybook
 
+      - name: Set remote URL with token
+        working-directory: ./packages/docs
+        run: git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/van-gomes/design-system-ideathon.git
+
       - name: Deploy Storybook
         working-directory: ./packages/docs
-        run: npm run deploy-storybook -- --ci --existing-output-dir=storybook-static
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run deploy-storybook
