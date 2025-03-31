@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "deploy-storybook": "storybook-to-ghpages",
+    "deploy-storybook": "storybook-to-ghpages --git-remote https://$GH_TOKEN@github.com/van-gomes/design-system-ideathon.git",
     "build-storybook": "storybook build"
   },
   "dependencies": {
