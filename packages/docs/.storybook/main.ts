@@ -1,10 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { dirname, join } from "path";
 
-module.exports = {
-  "stories": ["../src/pages/**/*.mdx", "../src/stories/**/*.stories.tsx"],
+function getAbsolutePath(value: string): unknown {
+  return dirname(require.resolve(join(value, "package.json")));
+}
 
-  "addons": [
+export default {
+  stories: ["../src/pages/**/*.mdx", "../src/stories/**/*.stories.@(ts|tsx)"],
+
+  addons: [
     getAbsolutePath("@storybook/addon-links"),
     getAbsolutePath("@storybook/addon-essentials"),
     getAbsolutePath("@storybook/addon-interactions"),
@@ -13,13 +17,13 @@ module.exports = {
     "@chromatic-com/storybook"
   ],
 
-  "framework": {
+  framework: {
     name: getAbsolutePath("@storybook/react-vite"),
     options: {}
   },
 
-  "features": {
-    "storyStoreV7": true
+  features: {
+    storyStoreV7: true
   },
 
   viteFinal: async (config, { configType }) => {
@@ -30,8 +34,4 @@ module.exports = {
   docs: {
     autodocs: true
   }
-}
-
-function getAbsolutePath(value: string): unknown {
-  return dirname(require.resolve(join(value, "package.json")));
-}
+};
