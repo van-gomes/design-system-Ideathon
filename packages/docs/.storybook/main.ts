@@ -8,8 +8,7 @@ module.exports = {
     getAbsolutePath("@storybook/addon-interactions"),
     getAbsolutePath("@storybook/addon-a11y"),
     getAbsolutePath("@storybook/addon-mdx-gfm"),
-    "@chromatic-com/storybook",
-    "@storybook/addon-a11y"
+    "@chromatic-com/storybook"
   ],
 
   "framework": {
@@ -21,13 +20,21 @@ module.exports = {
     "storyStoreV7": true
   },
 
-  viteFinal: (config, { configType }) => {
+  viteFinal: async (config, { configType }) => {
     if (configType === 'PRODUCTION') {
-      config.base = '/design-system-Roche-Ideathon/'
+      config.base = '/design-system-Roche-Ideathon/';
+      config.build = {
+        ...(config.build || {}),
+        assetsDir: 'assets',
+        rollupOptions: {
+          output: {
+            manualChunks: undefined,
+          },
+        },
+      };
     }
-
-    return config
-  },
+    return config;
+  },  
 
   docs: {
     autodocs: true
