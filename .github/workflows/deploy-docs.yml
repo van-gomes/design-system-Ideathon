@@ -1,4 +1,4 @@
-name: Deploy docs
+name: Deploy Storybook
 
 on:
   push:
@@ -11,27 +11,31 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./packages/docs
+
     steps:
-      - name: Checkout
+      - name: Checkout do código
         uses: actions/checkout@v3
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 20
+          cache: 'npm'
 
-      - run: npm ci
+      - name: Instalar dependências do monorepo
+        run: npm install
+        working-directory: ./
 
-      - run: npm run build
-
-      - name: Build Storybook
-        working-directory: ./packages/docs
+      - name: Build do Storybook
         run: npm run build-storybook
 
-      - name: Set remote URL with token
-        working-directory: ./packages/docs
-        run: git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/van-gomes/design-system-ideathon.git
-
-      - name: Deploy Storybook
-        working-directory: ./packages/docs
-        run: npm run deploy-storybook
+      - name: Deploy para GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: packages/docs/storybook-static
+          clean: true

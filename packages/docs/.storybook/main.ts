@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { dirname, join } from "path";
 
 module.exports = {
@@ -21,12 +22,9 @@ module.exports = {
     "storyStoreV7": true
   },
 
-  viteFinal: (config, { configType }) => {
-    if (configType === 'PRODUCTION') {
-      config.base = '/design-system-Roche/'
-    }
-
-    return config
+  viteFinal: async (config, { configType }) => {
+    config.base = '/design-system-Roche/';
+    return config;
   },
 
   docs: {
