@@ -12,10 +12,6 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: ./packages/docs
-
     steps:
       - name: Checkout do código
         uses: actions/checkout@v3
@@ -26,11 +22,14 @@ jobs:
           node-version: 20
           cache: 'npm'
 
-      - name: Instalar dependências do monorepo
+      - name: Instalar todas as dependências do monorepo
         run: npm install
-        working-directory: ./
+
+      - name: Build completo com Turbo
+        run: npm run build
 
       - name: Build do Storybook
+        working-directory: packages/docs
         run: npm run build-storybook
 
       - name: Deploy para GitHub Pages
