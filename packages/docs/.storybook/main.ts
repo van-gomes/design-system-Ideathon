@@ -1,4 +1,5 @@
 import { dirname, join } from "path";
+
 module.exports = {
   "stories": ["../src/pages/**/*.mdx", "../src/stories/**/*.stories.tsx"],
 
@@ -20,21 +21,13 @@ module.exports = {
     "storyStoreV7": true
   },
 
-  viteFinal: async (config, { configType }) => {
+  viteFinal: (config, { configType }) => {
     if (configType === 'PRODUCTION') {
-      config.base = '/design-system-Roche-Ideathon/';
-      config.build = {
-        ...(config.build || {}),
-        assetsDir: 'assets',
-        rollupOptions: {
-          output: {
-            manualChunks: undefined,
-          },
-        },
-      };
+      config.base = '/design-system-Roche/'
     }
-    return config;
-  },  
+
+    return config
+  },
 
   docs: {
     autodocs: true
