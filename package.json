@@ -6,7 +6,8 @@
   "packageManager": "npm@10.8.2",
   "scripts": {
     "dev": "turbo run dev --parallel",
-    "build": "turbo run build"
+    "build": "turbo run build",
+    "storybook:fix-paths": "sed -i 's|<head>|<head><base href=\"/design-system-Roche/\">|' packages/docs/storybook-static/index.html"
   },
   "dependencies": {
     "@stitches/react": "^1.2.8"
