@@ -26,10 +26,10 @@ export default {
     storyStoreV7: true
   },
 
-  viteFinal: async (config, { configType }) => {
+  viteFinal: async (config) => {
     config.base = '/design-system-Roche/';
     return config;
-  },
+  },  
 
   docs: {
     autodocs: true
