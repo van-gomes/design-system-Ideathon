@@ -23,11 +23,12 @@ export default {
   },
 
   features: {
-    storyStoreV7: true
+    interactionsDebugger: true,
+    storyStoreV7: false
   },
 
-  viteFinal: async (config) => {
-    config.base = '/design-system-Roche/';
+  viteFinal: async (config, options) => {
+    config.base = options.configType === 'PRODUCTION' ? '/design-system-Roche/' : '/';
     return config;
   },  
 
